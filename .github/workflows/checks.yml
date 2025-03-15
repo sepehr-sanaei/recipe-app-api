@@ -12,9 +12,23 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: CheckOut
         uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Specify the Python version you need
+
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          sudo pip3 install docker-compose
+
       - name: Test
         run: docker-compose run --rm app sh -c "python manage.py test"
+
       - name: Lint
         run: docker-compose run --rm app sh -c "flake8"
