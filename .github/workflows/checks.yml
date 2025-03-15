@@ -21,14 +21,13 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install Docker Compose
+      - name: Install Docker Compose v2
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3-pip
-          sudo pip3 install docker-compose
+          sudo apt-get install -y docker-compose-plugin
 
       - name: Test
-        run: docker-compose run --rm app sh -c "python manage.py test"
+        run: docker compose run --rm app sh -c "python manage.py test"
 
       - name: Lint
-        run: docker-compose run --rm app sh -c "flake8"
+        run: docker compose run --rm app sh -c "flake8"
