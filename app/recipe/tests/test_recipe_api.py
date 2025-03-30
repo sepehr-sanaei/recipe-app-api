@@ -391,7 +391,7 @@ class PrivateRecipeApiTest(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(recipe.ingredients.count(), 0)
-        
+
     def test_filter_by_tags(self):
         """Test filter recipes by tags"""
         r1 = create_recipe(user=self.user, title='Salad')
@@ -431,6 +431,7 @@ class PrivateRecipeApiTest(TestCase):
         self.assertIn(s1.data, res.data)
         self.assertIn(s2.data, res.data)
         self.assertNotIn(s3.data, res.data)
+
 
 class ImageUploadTests(TestCase):
     """Test for uploading images to a recipe."""
